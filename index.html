@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VaultX - Password Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>VaultX</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Home Vault</a></li>
+                <li><a href="add-credential.html" class="nav-link"><i class="fas fa-plus"></i> Add Credential</a></li>
+                <li><a href="password-generator.html" class="nav-link"><i class="fas fa-key"></i> Password Generator</a></li>
+                <li><a href="breach-alerts.html" class="nav-link"><i class="fas fa-exclamation-triangle"></i> Breach Alerts</a></li>
+                <li><a href="settings.html" class="nav-link"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <h1>Your Vault</h1>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="window.location.href='add-credential.html'">
+                        <i class="fas fa-plus"></i> Add New
+                    </button>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search credentials..." id="searchInput">
+                    </div>
+                </div>
+            </header>
+
+            <div class="vault-stats">
+                <div class="stat-card">
+                    <i class="fas fa-key"></i>
+                    <div>
+                        <h3 id="totalCredentials">0</h3>
+                        <p>Total Credentials</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <div>
+                        <h3 id="strongPasswords">0</h3>
+                        <p>Strong Passwords</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <h3 id="weakPasswords">0</h3>
+                        <p>Weak Passwords</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="credentials-section">
+                <div class="section-header">
+                    <h2>Your Credentials</h2>
+                    <select id="sortSelect">
+                        <option value="name">Sort by Name</option>
+                        <option value="date">Sort by Date</option>
+                        <option value="strength">Sort by Strength</option>
+                    </select>
+                </div>
+                
+                <div class="credentials-grid" id="credentialsGrid">
+                    <!-- Credentials will be populated by JavaScript -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Password View Modal -->
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Password Details</h3>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="password-field">
+                    <label>Password:</label>
+                    <div class="password-display">
+                        <input type="password" id="modalPassword" readonly>
+                        <button onclick="togglePasswordVisibility()" id="toggleBtn">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button onclick="copyPassword()" class="copy-btn">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

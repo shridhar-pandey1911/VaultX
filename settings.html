@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - VaultX</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>VaultX</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home Vault</a></li>
+                <li><a href="add-credential.html" class="nav-link"><i class="fas fa-plus"></i> Add Credential</a></li>
+                <li><a href="password-generator.html" class="nav-link"><i class="fas fa-key"></i> Password Generator</a></li>
+                <li><a href="breach-alerts.html" class="nav-link"><i class="fas fa-exclamation-triangle"></i> Breach Alerts</a></li>
+                <li><a href="settings.html" class="nav-link active"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <h1>Settings</h1>
+                <p>Manage your VaultX preferences and security settings</p>
+            </header>
+
+            <div class="settings-container">
+                <div class="settings-section">
+                    <h2><i class="fas fa-lock"></i> Master Password</h2>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h3>Change Master Password</h3>
+                            <p>Update your master password to keep your vault secure</p>
+                        </div>
+                        <button onclick="showChangePasswordModal()" class="btn btn-primary">Change Password</button>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h3>Password Hint</h3>
+                            <p>Set a hint to help you remember your master password</p>
+                        </div>
+                        <button onclick="showPasswordHintModal()" class="btn btn-secondary">Set Hint</button>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h2><i class="fas fa-shield-alt"></i> Security</h2>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h3>Auto-lock Timeout</h3>
+                            <p>Automatically lock your vault after inactivity</p>
+                        </div>
+                        <select id="autoLockTimeout" class="setting-select">
+                            <option value="5">5 minutes</option>
+                            <option value="15" selected>15 minutes</option>
+                            <option value="30">30 minutes</option>
+                            <option value="60">1 hour</option>
+                            <option value="0">Never</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h3>Two-Factor Authentication</h3>
+                            <p>Add an extra layer of security to your vault</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="twoFactorAuth">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h2><i class="fas fa-bell"></i> Notifications</h2>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h3>Breach Alerts</h3>
+                            <p>Get notified when your accounts may be compromised</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="breachAlerts" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h3>Weak Password Warnings</h3>
+                            <p>Get alerts for weak or reused passwords</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="weakPasswordWarnings" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h2><i class="fas fa-download"></i> Data Management</h2>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h3>Export Vault</h3>
+                            <p>Download a backup of your vault data</p>
+                        </div>
+                        <button onclick="exportVault()" class="btn btn-secondary">Export Data</button>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h3>Import Data</h3>
+                            <p>Import passwords from another password manager</p>
+                        </div>
+                        <button onclick="importVault()" class="btn btn-secondary">Import Data</button>
+                    </div>
+                </div>
+
+                <div class="settings-section danger-zone">
+                    <h2><i class="fas fa-exclamation-triangle"></i> Danger Zone</h2>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h3>Clear All Data</h3>
+                            <p>Permanently delete all stored credentials and settings</p>
+                        </div>
+                        <button onclick="clearAllData()" class="btn btn-danger">Clear All Data</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div id="changePasswordModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Change Master Password</h3>
+                <span class="close" onclick="closeChangePasswordModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="changePasswordForm">
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password</label>
+                        <input type="password" id="currentPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm New Password</label>
+                        <input type="password" id="confirmPassword" required>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeChangePasswordModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Change Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Hint Modal -->
+    <div id="passwordHintModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Set Password Hint</h3>
+                <span class="close" onclick="closePasswordHintModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="passwordHintForm">
+                    <div class="form-group">
+                        <label for="passwordHint">Password Hint</label>
+                        <input type="text" id="passwordHint" placeholder="Enter a hint to help you remember your password">
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closePasswordHintModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Hint</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

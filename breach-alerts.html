@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breach Alerts - VaultX</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>VaultX</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home Vault</a></li>
+                <li><a href="add-credential.html" class="nav-link"><i class="fas fa-plus"></i> Add Credential</a></li>
+                <li><a href="password-generator.html" class="nav-link"><i class="fas fa-key"></i> Password Generator</a></li>
+                <li><a href="breach-alerts.html" class="nav-link active"><i class="fas fa-exclamation-triangle"></i> Breach Alerts</a></li>
+                <li><a href="settings.html" class="nav-link"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <h1>Security Breach Alerts</h1>
+                <p>Monitor your accounts for security breaches</p>
+            </header>
+
+            <div class="breach-overview">
+                <div class="breach-stat">
+                    <i class="fas fa-shield-alt"></i>
+                    <div>
+                        <h3 id="safeAccounts">0</h3>
+                        <p>Safe Accounts</p>
+                    </div>
+                </div>
+                <div class="breach-stat warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <h3 id="breachedAccounts">0</h3>
+                        <p>Breached Accounts</p>
+                    </div>
+                </div>
+                <div class="breach-stat">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h3 id="lastScan">Never</h3>
+                        <p>Last Scan</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scan-section">
+                <button onclick="scanForBreaches()" class="btn btn-primary scan-btn" id="scanBtn">
+                    <i class="fas fa-search"></i> Scan for Breaches
+                </button>
+            </div>
+
+            <div class="alerts-section">
+                <div class="section-header">
+                    <h2>Recent Alerts</h2>
+                    <select id="alertFilter">
+                        <option value="all">All Alerts</option>
+                        <option value="critical">Critical</option>
+                        <option value="warning">Warning</option>
+                        <option value="resolved">Resolved</option>
+                    </select>
+                </div>
+
+                <div class="alerts-list" id="alertsList">
+                    <!-- Alerts will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="breach-info">
+                <h3><i class="fas fa-info-circle"></i> What to do if your account is breached:</h3>
+                <ol>
+                    <li>Change your password immediately</li>
+                    <li>Enable two-factor authentication if available</li>
+                    <li>Check for any unauthorized activity</li>
+                    <li>Update passwords on other accounts if you reused the same password</li>
+                    <li>Monitor your accounts closely for suspicious activity</li>
+                </ol>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
